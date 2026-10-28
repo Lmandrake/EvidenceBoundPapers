@@ -1,0 +1,6 @@
+FICTIONAL SOURCE. Invented for the EvidenceBoundPapers synthetic example; no such paper exists.
+
+Ibarra, L. (2022). A census of deep float recoveries. Review of Notional Oceanography 5, 1-8.
+
+Of the deep floats deployed in the census period, fewer than one in ten was ever recovered for
+post-deployment calibration.

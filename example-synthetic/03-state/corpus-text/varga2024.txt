@@ -1,0 +1,13 @@
+FICTIONAL SOURCE. Invented for the EvidenceBoundPapers synthetic example; no such paper exists.
+
+Varga, A., Halvorsen, T. and Ibarra, L. (2024). Residual drift in deep profiling floats.
+Journal of Imaginary Ocean Observing 12, 101-118.
+
+Abstract. We compare fleet-average and per-float temperature adjustments for profiling floats
+that sample below 2000 m. Applying only a fleet-average bias adjustment leaves a residual
+warming trend error of 0.12 W m-2 in the 2000-4000 m layer, which is comparable to the signal
+the deep record is meant to detect. Per-float corrections remove most of this error but are
+not published with stated uncertainties.
+
+1. Introduction. Deep floats are recovered rarely, so their sensors are calibrated
+against shipboard reference casts taken at deployment and seldom afterwards.

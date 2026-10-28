@@ -1,0 +1,11 @@
+FICTIONAL SOURCE. Invented for the EvidenceBoundPapers synthetic example; no such paper exists.
+
+Lindqvist, M. and Oduya, K. (2023). Shared reference casts for abyssal float calibration.
+Annals of Hypothetical Hydrography 7, 44-59.
+
+Results. Across a pilot of 40 floats, calibrating each profile against a shared reference
+cast reduced the heat-content RMSE to 0.4 W m-2 relative to the shipboard reference, compared
+with 1.1 W m-2 for profiles carrying only the fleet-average adjustment.
+
+Discussion. The pilot used Abyss-6K units only; whether other housings drift the same way
+was not tested.

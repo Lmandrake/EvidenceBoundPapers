@@ -1,0 +1,7 @@
+FICTIONAL SOURCE. Invented for the EvidenceBoundPapers synthetic example; no such paper exists.
+
+Okafor, N. (2025). Why deep thermistors drift. Letters in Speculative Instrumentation 3, 9-15.
+
+We show in pressure-chamber tests that slow creep of the pressure housing shifts the
+thermistor's reference resistance, producing a temperature drift that grows with time at depth.
+The same housing design is used in the DeepProfiler-2 and Abyss-6K floats.

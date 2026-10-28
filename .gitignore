@@ -1,0 +1,21 @@
+# Cached source full text for span verification. Never committed in a real
+# instance: it is third-party copyrighted material, and it can be large.
+**/corpus-text/*.txt
+# ...except the synthetic example's, which are invented texts written to be quoted from.
+# Without them a fresh clone fails E-02 (the checker fails closed on a missing cache).
+!example-synthetic/03-state/corpus-text/*.txt
+
+# Built submission artifacts. The markdown sources are tracked; these are not.
+*.docx
+*.pdf
+
+# Placard sidecars belong beside the originals in the source tree, not here.
+*.placard.md
+
+__pycache__/
+*.pyc
+.DS_Store
+.venv/
+
+# Second-model consult state (transcripts, thread pointers). Never committed.
+.consult/

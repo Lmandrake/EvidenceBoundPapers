@@ -57,24 +57,24 @@ example-synthetic` restores them.)
 
 ## The verification suite
 
-The checker covers one place a confident falsehood gets into a document. Five companion
+The checker covers one place a confident falsehood gets into a document. Three companion
 skills in `skills/` cover the others. They are written for an AI coding agent such as Claude
 Code (each `SKILL.md` is the entry point), and read just as well as checklists for a person.
 
 | Skill | The failure it catches |
 |---|---|
-| `confident-wrong-numbers` | A query whose shape returns a plausible wrong number: a count, a zero, an empty list, an all-None field |
-| `measuring-large-artifacts` | A number taken from a file too large to read whole, where grep and wc mislead |
 | `verify-model-quotes` | A model quotation, or the page, section or line it cites, that does not exist in the source |
 | `claim-provenance` | A claim encoded as knowledge before anyone confirmed its source is real, was read, and says what you think |
 | `grader-validation` | A scorer, oracle or guard that reports a clean verdict because it cannot see the fault |
 
-They run from cheapest to deepest: the first three check a value against its source,
+They run from cheapest to deepest: `verify-model-quotes` checks a value against its source,
 `claim-provenance` checks the source, and `grader-validation` checks the instrument doing the
-checking. See `skills/README.md`. Their own tests need `pytest` (and `jq` for one), and run
-from each skill's directory. Skills they mention but that are not in this repo
-(`knowledge-registry`, `incomplete-ground-truth`, `evaluation-independence`,
-`falsifiable-claims`) are neighbours, not dependencies.
+checking. See `skills/README.md`. `verify-model-quotes` has its own tests, which need `pytest`;
+run them from its directory. Two companions that once sat here,
+`confident-wrong-numbers` and `measuring-large-artifacts`, live in [MandrakeWorkflows](https://github.com/Lmandrake/MandrakeWorkflows). Skills these mention but
+that are not in this repo (`confident-wrong-numbers`, `measuring-large-artifacts`,
+`knowledge-registry`, `incomplete-ground-truth`, `evaluation-independence`, `falsifiable-claims`)
+are neighbours, not dependencies.
 
 ## Layout
 

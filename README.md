@@ -1,17 +1,24 @@
 # EvidenceBoundPapers
 
-**Papers in which every claim is traced to evidence and checked by a machine.**
+**A harness for writing AI-assisted scientific papers in which every claim is traced to a source and checked by a program that calls no model.**
 
-A language model can write a fluent scientific paper in minutes. Nothing in that fluency
-tells you which sentences are true. A citation can be invented, a quotation can be
-paraphrased into something the source never said, and a revision loop that grades its own
-work will report steady improvement while it smooths a sharp, correct claim into nothing.
+It is for researchers and agent builders who want a language model to draft a paper without
+being trusted to tell the truth about it. The argument lives in a typed claim graph, the
+prose is only a rendering of that graph, and a deterministic checker that the model may not
+edit decides whether the draft may continue.
 
-This repository is a harness for writing AI-assisted science that can be audited. The
-argument lives in a typed **claim graph**: definitions, gaps, remedies, asks, conceded
-tensions, and the evidence supporting each one. The prose is only a rendering of that graph.
-A **deterministic checker** that calls no model, and that the model may not edit, enforces
-the rules:
+## Why it exists
+
+A model can write a fluent paper in minutes, and nothing in the fluency says which sentences
+are true. A citation can be invented. A quotation can be paraphrased into something the
+source never said. A revision loop that grades its own work will report steady improvement
+while it smooths a sharp, correct claim into nothing.
+
+## What is different here
+
+The claim graph holds definitions, gaps, remedies, asks, conceded tensions and the evidence
+behind each. Rules are enforced by `template/tools/enforce.py`, which uses only the Python
+standard library:
 
 - every citation resolves to a closed corpus, so a citation cannot be made up;
 - every quoted span is found character for character in the cited source's cached text;
@@ -24,8 +31,13 @@ the rules:
 - protected human-written text is never silently dropped;
 - a check that passed last run and fails now halts the loop.
 
+Two design choices carry most of the weight. The checker is frozen: agents may propose
+changes to the spec but cannot apply them (`template/CLAUDE.md`, hard rule 2). And a
+regression is a stop, not a note, so a loop cannot quietly trade a passing check for a better
+score.
+
 Blind reviewers score the draft against a frozen rubric, and a human rules at four gates.
-The method produced two submitted white papers. In both, a domain expert then found claims
+The method produced two submitted white papers (not included here). In both, a domain expert then found claims
 whose quotes were verbatim but whose scope outran the source, while the checker read clean.
 That limit is stated up front (see `SKILL.md`, "the ceiling of verification"), and the
 evidence audit that answers it ships as a template file, with a filled-in example in
@@ -37,13 +49,13 @@ evidence audit that answers it ships as a template file, with a filled-in exampl
 git clone https://github.com/Lmandrake/EvidenceBoundPapers && cd EvidenceBoundPapers
 python3 template/tools/enforce.py --root example-synthetic
 #   verdict=CLEAN  passed=21/21 applicable (0 n/a)
-python3 -m unittest discover -s tests          # 44 checker tests
+python3 -m unittest discover -s tests          # 50 checker tests
 ```
 
 `example-synthetic/` is an **invented** two-page paper on deep-ocean heat content, with
 invented sources, so the whole graph can be read in five minutes. Now break it. Change one
-word inside a quoted span in `example-synthetic/03-state/claims.md`, for example "one in ten"
-to "one in twenty", and run the checker again:
+word inside a quoted span in `example-synthetic/03-state/claims.md`, for example the span
+"fewer than one in ten was ever recovered..." changed to "one in twenty", and run the checker again:
 
 ```
 verdict=HALT  passed=19/21 applicable (0 n/a)
@@ -69,12 +81,12 @@ Code (each `SKILL.md` is the entry point), and read just as well as checklists f
 
 They run from cheapest to deepest: `verify-model-quotes` checks a value against its source,
 `claim-provenance` checks the source, and `grader-validation` checks the instrument doing the
-checking. See `skills/README.md`. `verify-model-quotes` has its own tests, which need `pytest`;
-run them from its directory. Two companions that once sat here,
-`confident-wrong-numbers` and `measuring-large-artifacts`, live in [MandrakeWorkflows](https://github.com/Lmandrake/MandrakeWorkflows). Skills these mention but
-that are not in this repo (`confident-wrong-numbers`, `measuring-large-artifacts`,
-`knowledge-registry`, `incomplete-ground-truth`, `evaluation-independence`, `falsifiable-claims`)
-are neighbours, not dependencies.
+checking. See `skills/README.md`. `verify-model-quotes` has its own tests (7, need `pytest`);
+run them from `skills/verify-model-quotes`. Two companions that once sat here,
+`confident-wrong-numbers` and `measuring-large-artifacts`, live in
+[MandrakeWorkflows](https://github.com/Lmandrake/MandrakeWorkflows). Other skills the text
+mentions (`knowledge-registry`, `incomplete-ground-truth`, `evaluation-independence`,
+`falsifiable-claims`) are neighbours, not dependencies and not in this repo.
 
 ## Layout
 

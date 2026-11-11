@@ -67,6 +67,13 @@ the quote was not found in. Each check's failing case is a test in `tests/test_e
 (Running the checker updates the example's report and log files; `git checkout
 example-synthetic` restores them.)
 
+**Confirmed stdlib-only:** no `pyproject.toml` or `requirements.txt` at the repo root — the
+"60 seconds" claim above holds on a bare `python3`. The one exception is `verify-model-quotes`'s
+own 7 tests, which need `pytest` (optional, only if you run those). No login, token, or
+`launchd`/job layer exists in this repo.
+
+*Detected 2026-11-10, not verified by running it.*
+
 ## The verification suite
 
 The checker covers one place a confident falsehood gets into a document. Three companion
